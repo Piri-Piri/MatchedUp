@@ -24,6 +24,16 @@
 
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // update (already) logged-in users 
+    if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
+        [self updateUserInformation];
+        [self performSegueWithIdentifier:@"toTabBarSegue" sender:self];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -78,8 +88,6 @@
             //cCreate a URL
             NSString *facebookID = userDict[@"id"];
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-            
-
             
             NSMutableDictionary *userProfile = [[NSMutableDictionary alloc] initWithCapacity:8];
             
