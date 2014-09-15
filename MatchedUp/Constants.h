@@ -55,7 +55,7 @@ extern NSString *const kChatRoomUser2Key;
 extern NSString *const kChatClassKey;
 extern NSString *const kChatChatroomKey;
 extern NSString *const kChatFromUserKey;
-extern NSString *const kChatFromToKey;
+extern NSString *const kChatToUserKey;
 extern NSString *const kChatTextKey;
 
 #pragma mark - Settings

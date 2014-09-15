@@ -61,7 +61,7 @@ NSString *const kChatRoomUser2Key                   = @"user2";
 NSString *const kChatClassKey                       = @"Chat";
 NSString *const kChatChatroomKey                    = @"chatroom";
 NSString *const kChatFromUserKey                    = @"fromUser";
-NSString *const kChatFromToKey                      = @"toUser";
+NSString *const kChatToUserKey                      = @"toUser";
 NSString *const kChatTextKey                        = @"text";
 
 #pragma mark - Settings
