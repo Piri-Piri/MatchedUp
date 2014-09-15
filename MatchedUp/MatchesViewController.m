@@ -76,7 +76,6 @@
     [combinedQuery includeKey:@"user2"];
     [combinedQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
-            NSLog(@"Object: %@", objects);
             [self.availableChatRooms removeAllObjects];
             [self.availableChatRooms addObjectsFromArray:objects];
             [self.tableView reloadData];
@@ -127,6 +126,7 @@
             [pictureFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
                 cell.imageView.image = [UIImage imageWithData:data];
                 cell.contentMode = UIViewContentModeScaleAspectFit;
+                [self.tableView reloadData];
             }];
         }
     }];
