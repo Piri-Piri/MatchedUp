@@ -50,6 +50,20 @@ NSString *const kActivityFromUserKey                = @"fromUser";
 NSString *const kActivityToUserKey                  = @"toUser";
 NSString *const kActivityPhotoKey                   = @"photo";
 
+#pragma mark - ChatRoom Class
+
+NSString *const kChatRoomClassKey                   = @"ChatRoom";
+NSString *const kChatRoomUser1Key                   = @"user1";
+NSString *const kChatRoomUser2Key                   = @"user2";
+
+#pragma mark - Chat Class
+
+NSString *const kChatClassKey                       = @"Chat";
+NSString *const kChatChatroomKey                    = @"chatroom";
+NSString *const kChatFromUserKey                    = @"fromUser";
+NSString *const kChatFromToKey                      = @"toUser";
+NSString *const kChatTextKey                        = @"text";
+
 #pragma mark - Settings
 
 NSString *const kMenEnabledKey                      = @"men";

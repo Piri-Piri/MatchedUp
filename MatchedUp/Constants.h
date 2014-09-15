@@ -44,6 +44,20 @@ extern NSString *const kActivityFromUserKey;
 extern NSString *const kActivityToUserKey;
 extern NSString *const kActivityPhotoKey;
 
+#pragma mark - ChatRoom Class
+
+extern NSString *const kChatRoomClassKey;
+extern NSString *const kChatRoomUser1Key;
+extern NSString *const kChatRoomUser2Key;
+
+#pragma mark - Chat Class
+
+extern NSString *const kChatClassKey;
+extern NSString *const kChatChatroomKey;
+extern NSString *const kChatFromUserKey;
+extern NSString *const kChatFromToKey;
+extern NSString *const kChatTextKey;
+
 #pragma mark - Settings
 
 extern NSString *const kMenEnabledKey;
