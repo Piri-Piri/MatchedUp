@@ -13,19 +13,25 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="05Q-n1-RWh">
-                                <rect key="frame" x="150" y="324" width="20" height="20"/>
+                                <rect key="frame" x="150" y="480" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VpQ-DQ-GHh">
-                                <rect key="frame" x="89" y="269" width="143" height="30"/>
+                                <rect key="frame" x="77" y="518" width="166" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Login with Facebook">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <state key="normal" title="Login with Facebook" backgroundImage="Facebook.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="loginAction:" destination="KcK-wo-YEo" eventType="touchUpInside" id="svc-o4-ahm"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo.png" id="Dg5-2A-cqB">
+                                <rect key="frame" x="93" y="172" width="134" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -39,7 +45,7 @@
             </objects>
             <point key="canvasLocation" x="10" y="0.0"/>
         </scene>
-        <!--Home View Controller-->
+        <!--Matched Up-->
         <scene sceneID="12S-sa-ipv">
             <objects>
                 <viewController id="4Df-js-qoP" customClass="HomeViewController" sceneMemberID="viewController">
@@ -47,74 +53,81 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="zFM-nw-hof">
-                                <rect key="frame" x="20" y="84" width="280" height="280"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pos-o7-8iz">
-                                <rect key="frame" x="20" y="491" width="80" height="30"/>
+                            <view contentMode="scaleToFill" id="Boj-VE-Bez">
+                                <rect key="frame" x="20" y="65" width="280" height="380"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Like">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="likeAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="wDT-kl-itw"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Qy6-Qf-sMC">
-                                <rect key="frame" x="120" y="491" width="80" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VxQ-jL-Bqt">
+                                        <rect key="frame" x="8" y="351" width="138" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UserImage.png" id="zFM-nw-hof">
+                                        <rect key="frame" x="0.0" y="0.0" width="280" height="335"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UkM-7N-iWa">
+                                        <rect key="frame" x="243" y="351" width="29" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="XYs-Fq-ZW0">
+                                <rect key="frame" x="24" y="471" width="280" height="77"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Info">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="infoAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="qSe-iS-ncH"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="firstName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VxQ-jL-Bqt">
-                                <rect key="frame" x="20" y="380" width="138" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="age" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="UkM-7N-iWa">
-                                <rect key="frame" x="263" y="380" width="29" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tagLine" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HNM-qR-d0K">
-                                <rect key="frame" x="20" y="409" width="280" height="51"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9LP-OS-k6D">
-                                <rect key="frame" x="224" y="491" width="80" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Dislike">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="dislikeAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="PrC-dT-cxn"/>
-                                </connections>
-                            </button>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pos-o7-8iz">
+                                        <rect key="frame" x="8" y="20" width="55" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="LikeIcon.png">
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="likeAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="wDT-kl-itw"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qy6-Qf-sMC">
+                                        <rect key="frame" x="121" y="20" width="39" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="InfoIcon.png">
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="infoAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="qSe-iS-ncH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9LP-OS-k6D">
+                                        <rect key="frame" x="234" y="20" width="38" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <state key="normal" image="DislikeIcon.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="dislikeAction:" destination="4Df-js-qoP" eventType="touchUpInside" id="PrC-dT-cxn"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="BHr-Eo-Sv7">
-                        <barButtonItem key="leftBarButtonItem" title="Chat" id="Lt7-E4-NlT">
+                    <navigationItem key="navigationItem" title="Matched Up" id="BHr-Eo-Sv7">
+                        <barButtonItem key="leftBarButtonItem" image="ChatIcon.png" id="Lt7-E4-NlT">
                             <connections>
                                 <action selector="chatAction:" destination="4Df-js-qoP" id="dse-sH-L7d"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="hIZ-LO-1kr">
+                        <barButtonItem key="rightBarButtonItem" image="SettingIcon.png" id="hIZ-LO-1kr">
                             <connections>
                                 <action selector="settingsAction:" destination="4Df-js-qoP" id="lZW-c9-znm"/>
                                 <segue destination="BX9-0R-PtT" kind="push" identifier="toSettingsSegue" id="CzE-YM-C8S"/>
@@ -123,14 +136,15 @@
                     </navigationItem>
                     <connections>
                         <outlet property="ageLabel" destination="UkM-7N-iWa" id="K8Y-5y-QgP"/>
+                        <outlet property="buttonContainerView" destination="XYs-Fq-ZW0" id="pwQ-N9-Wde"/>
                         <outlet property="chatBarButtonItem" destination="Lt7-E4-NlT" id="Fuk-eO-xVj"/>
                         <outlet property="dislikeButton" destination="9LP-OS-k6D" id="fyN-C6-dVY"/>
                         <outlet property="firstNameLabel" destination="VxQ-jL-Bqt" id="Lpb-51-qUG"/>
                         <outlet property="infoButton" destination="Qy6-Qf-sMC" id="z6k-rg-5yz"/>
+                        <outlet property="labelContainerView" destination="Boj-VE-Bez" id="wwp-0x-9cF"/>
                         <outlet property="likeButton" destination="pos-o7-8iz" id="fHo-fl-8vL"/>
                         <outlet property="profilePictureImageView" destination="zFM-nw-hof" id="i0K-yD-MhM"/>
                         <outlet property="settingsBarButtonItem" destination="hIZ-LO-1kr" id="8kv-rC-JlE"/>
-                        <outlet property="tagLineLabel" destination="HNM-qR-d0K" id="9y9-Ay-5WT"/>
                         <segue destination="9U8-tu-mF6" kind="push" identifier="toProfileSegue" id="51S-hM-DtQ"/>
                         <segue destination="gTT-L1-5gi" kind="modal" identifier="toMatchSegue" id="rV2-50-XE5"/>
                         <segue destination="ICC-mH-OmC" kind="push" identifier="toChatSegue" id="yo5-Py-X0y"/>
@@ -519,6 +533,16 @@
             <point key="canvasLocation" x="-424" y="0.0"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ChatIcon.png" width="22" height="22"/>
+        <image name="DislikeIcon.png" width="38" height="37"/>
+        <image name="Facebook.png" width="200" height="25"/>
+        <image name="InfoIcon.png" width="39" height="37"/>
+        <image name="LikeIcon.png" width="55" height="37"/>
+        <image name="Logo.png" width="134" height="94"/>
+        <image name="SettingIcon.png" width="22" height="20"/>
+        <image name="UserImage.png" width="320" height="221"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

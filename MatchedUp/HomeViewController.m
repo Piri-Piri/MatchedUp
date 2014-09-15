@@ -18,10 +18,11 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profilePictureImageView;
 @property (weak, nonatomic) IBOutlet UILabel *firstNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *ageLabel;
-@property (weak, nonatomic) IBOutlet UILabel *tagLineLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (weak, nonatomic) IBOutlet UIButton *dislikeButton;
+@property (weak, nonatomic) IBOutlet UIView *labelContainerView;
+@property (weak, nonatomic) IBOutlet UIView *buttonContainerView;
 
 @property (strong, nonatomic) NSArray *photos;
 @property (strong, nonatomic) PFObject *photo;
@@ -40,6 +41,8 @@
     // Do any additional setup after loading the view.
     
     // [TestUser saveTestUserToParse];
+    
+    [self setupViews];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -48,7 +51,6 @@
     self.profilePictureImageView.image = nil;
     self.firstNameLabel.text = nil;
     self.ageLabel.text = nil;
-    self.tagLineLabel.text = nil;
     
     self.likeButton.enabled = NO;
     self.dislikeButton.enabled = NO;
@@ -71,6 +73,24 @@
             NSLog(@"Error: %@", [error localizedDescription]);
         }
     }];
+}
+
+-(void)setupViews {
+    self.view.backgroundColor = [UIColor colorWithRed:242/255.0 green:242/255.0 blue:242/255.0 alpha:1.0];
+    
+    [self addShadowForView:self.buttonContainerView];
+    [self addShadowForView:self.labelContainerView];
+    self.profilePictureImageView.layer.masksToBounds = YES;
+    
+    //[self addShadowForView:self.profilePictureImageView;
+}
+
+-(void)addShadowForView:(UIView *)view {
+    view.layer.masksToBounds = NO;
+    view.layer.cornerRadius = 4; // if you like rounded corners
+    view.layer.shadowOffset = CGSizeMake(0, 1);
+    view.layer.shadowRadius = 1;
+    view.layer.shadowOpacity = 0.25;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -179,8 +199,6 @@
 - (void)updateView {
     self.firstNameLabel.text = self.photo[kPhotoUserKey][kUserProfileKey][kUserProfileFirstnameKey];
     self.ageLabel.text = [NSString stringWithFormat:@"%@", self.photo[kPhotoUserKey][kUserProfileKey][kUserProfileCalculatedAgeKey]];
-    self.tagLineLabel.text = self.photo[kPhotoUserKey][kPhotoTagLineKey];
-    
 }
 
 - (void)setupNextPhoto {
