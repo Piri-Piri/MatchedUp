@@ -27,16 +27,6 @@
 
 #pragma mark - View lifecycle
 
-/**
- *  Override point for customization.
- *
- *  Customize your view.
- *  Look at the properties on `JSQMessagesViewController` to see what is possible.
- *
- *  Customize your layout.
- *  Look at the properties on `JSQMessagesCollectionViewFlowLayout` to see what is possible.
- */
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -54,6 +44,7 @@
     else {
         self.withUser = self.chatRoom[@"user1"];
     }
+    
     self.title = self.withUser[kUserProfileKey][kUserProfileFirstnameKey];
     self.sender = self.currentUser[kUserProfileKey][kUserProfileFirstnameKey];
     
@@ -89,7 +80,7 @@
                       self.withUser[kUserProfileKey][kUserProfileFirstnameKey] : self.withUserPicture };
     
     // Update avatar with user picture in backgound
-    //[self loadPictureForAvatar];
+    [self loadPictureForAvatar];
     
     
     // Create bubble images.
