@@ -40,6 +40,15 @@
     // Do any additional setup after loading the view.
     
     // [TestUser saveTestUserToParse];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    self.profilePictureImageView.image = nil;
+    self.firstNameLabel.text = nil;
+    self.ageLabel.text = nil;
+    self.tagLineLabel.text = nil;
     
     self.likeButton.enabled = NO;
     self.dislikeButton.enabled = NO;
@@ -53,7 +62,11 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
             self.photos = objects;
-            [self queryForCurrentPhotoIndex];
+            if (![self allowPhotos]) {
+                [self setupNextPhoto];
+            } else {
+                [self queryForCurrentPhotoIndex];
+            }
         } else {
             NSLog(@"Error: %@", [error localizedDescription]);
         }
@@ -110,7 +123,7 @@
 - (void)queryForCurrentPhotoIndex {
     if ([self.photos count] > 0) {
         self.photo = self.photos[self.currentPhotoIndex];
-        PFFile *file = self.photo[@"image"];
+        PFFile *file = self.photo[kPhotoPictureKey];
         [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
             if (!error) {
                 self.profilePictureImageView.image = [UIImage imageWithData:data];
@@ -173,10 +186,43 @@
 - (void)setupNextPhoto {
     if (self.currentPhotoIndex + 1 < self.photos.count) {
         self.currentPhotoIndex++;
-        [self queryForCurrentPhotoIndex];
+        if (![self allowPhotos]) {
+            [self setupNextPhoto];
+        } else {
+            [self queryForCurrentPhotoIndex];
+        }
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No more Users to view" message:@"Check back later for more people!" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
         [alert show];
+    }
+}
+
+-(BOOL)allowPhotos {
+    int maxAge = (int)[[NSUserDefaults standardUserDefaults] integerForKey:kAgeMaxKey];
+    BOOL men = [[NSUserDefaults standardUserDefaults] boolForKey:kMenEnabledKey];
+    BOOL women = [[NSUserDefaults standardUserDefaults] boolForKey:kWomenEnabledKey];
+    BOOL single = [[NSUserDefaults standardUserDefaults] boolForKey:kSingleEnabledKey];
+    
+    
+    PFObject *photo = self.photos[self.currentPhotoIndex];
+    PFUser *user = photo[kPhotoUserKey];
+    
+    int userAge = [user[kUserProfileKey][kUserProfileCalculatedAgeKey] intValue];
+    NSString *gender = user[kUserProfileKey][kUserProfileGenderKey];
+    NSString *relationshipStatus = user[kUserProfileKey][kUserProfileRelationshipStatusKey];
+    
+    if (userAge > maxAge) {
+        return NO;
+    }
+    else if (men == NO && [gender isEqualToString:@"male"] ) {
+        return NO;
+    } else if (women == NO && [gender isEqualToString:@"female"] ) {
+        return NO;
+    }
+    else if (single == YES && ![relationshipStatus isEqualToString:@"single"]) {
+        return NO;
+    } else {
+        return YES;
     }
 }
 
@@ -260,22 +306,22 @@
 
 -(void)createChatRoom {
     // user1 likes user2 first
-    PFQuery *queryForChatRoom = [PFQuery queryWithClassName:@"ChatRoom"];
-    [queryForChatRoom whereKey:@"user1" equalTo:[PFUser currentUser]];
-    [queryForChatRoom whereKey:@"user2" equalTo:self.photo[kPhotoUserKey]];
+    PFQuery *queryForChatRoom = [PFQuery queryWithClassName:kChatRoomClassKey];
+    [queryForChatRoom whereKey:kChatRoomUser1Key equalTo:[PFUser currentUser]];
+    [queryForChatRoom whereKey:kChatRoomUser2Key equalTo:self.photo[kPhotoUserKey]];
     
     // user2 likes user1 first
-    PFQuery *queryForChatRoomInverse = [PFQuery queryWithClassName:@"ChatRoom"];
-    [queryForChatRoomInverse whereKey:@"user1" equalTo:self.photo[kPhotoUserKey]];
-    [queryForChatRoomInverse whereKey:@"user2" equalTo:[PFUser currentUser]];
+    PFQuery *queryForChatRoomInverse = [PFQuery queryWithClassName:kChatRoomClassKey];
+    [queryForChatRoomInverse whereKey:kChatRoomUser1Key equalTo:self.photo[kPhotoUserKey]];
+    [queryForChatRoomInverse whereKey:kChatRoomUser2Key equalTo:[PFUser currentUser]];
     
     PFQuery *combinedQuery = [PFQuery orQueryWithSubqueries:@[queryForChatRoom, queryForChatRoomInverse]];
     [combinedQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     if ([objects count] == 0) {
             NSLog(@"Creating a chatroom with matched user.");
-            PFObject *chatRoom = [PFObject objectWithClassName:@"ChatRoom"];
-            [chatRoom setObject:[PFUser currentUser] forKey:@"user1"];
-            [chatRoom setObject:self.photo[kPhotoUserKey] forKey:@"user2"];
+            PFObject *chatRoom = [PFObject objectWithClassName:kChatRoomClassKey];
+            [chatRoom setObject:[PFUser currentUser] forKey:kChatRoomUser1Key];
+            [chatRoom setObject:self.photo[kPhotoUserKey] forKey:kChatRoomUser2Key];
             [chatRoom saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 [self performSegueWithIdentifier:@"toMatchSegue" sender:nil];
             }];
