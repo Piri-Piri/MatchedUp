@@ -21,6 +21,12 @@
                   clientKey:@"85FSRMI1g06JJ5TLDbJJ3WaXJo9i3QwItqdspTUc"];
     
     [PFFacebookUtils initializeFacebook];
+    
+    NSString *defaultPrefsFile = [[NSBundle mainBundle] pathForResource:@"defaultPrefsFile" ofType:@"plist"];
+    NSDictionary *defaultPreferences = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPreferences];
+    
     return YES;
 }
 
