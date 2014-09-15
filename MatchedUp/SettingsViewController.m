@@ -74,7 +74,7 @@
     } else if (sender == self.showMenSwitch) {
         [[NSUserDefaults standardUserDefaults] setBool:self.showMenSwitch.isOn forKey:kMenEnabledKey];
     } else if (sender == self.showWomenSwitch) {
-        [[NSUserDefaults standardUserDefaults] setBool:self.showMenSwitch.isOn forKey:kWomenEnabledKey];
+        [[NSUserDefaults standardUserDefaults] setBool:self.showWomenSwitch.isOn forKey:kWomenEnabledKey];
     } else if (sender == self.singlesOnlySwitch) {
         [[NSUserDefaults standardUserDefaults] setBool:self.singlesOnlySwitch.isOn forKey:kSingleEnabledKey];
     }
