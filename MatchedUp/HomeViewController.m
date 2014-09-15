@@ -7,11 +7,12 @@
 //
 
 #import "HomeViewController.h"
+#import "TestUser.h"
 #import "ProfileViewController.h"
 #import "MatchViewController.h"
-#import "TestUser.h"
+#import "TransitionAnimator.h"
 
-@interface HomeViewController () <MatchViewControllerDelegate>
+@interface HomeViewController () <ProfileViewControllerDelegate, MatchViewControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *chatBarButtonItem;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *settingsBarButtonItem;
@@ -82,7 +83,7 @@
     [self addShadowForView:self.labelContainerView];
     self.profilePictureImageView.layer.masksToBounds = YES;
     
-    //[self addShadowForView:self.profilePictureImageView;
+    //[self addShadowForView:self.profilePictureImageView];
 }
 
 -(void)addShadowForView:(UIView *)view {
@@ -98,28 +99,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"toProfileSegue"]) {
         ProfileViewController *profileViewController = segue.destinationViewController;
         profileViewController.photo = self.photo;
-    } else if ([segue.identifier isEqualToString:@"toMatchSegue"]) {
-        MatchViewController *matchViewController = segue.destinationViewController;
-        matchViewController.matchedUserImage = self.profilePictureImageView.image;
-        matchViewController.delegate = self;
+        profileViewController.delegate = self;
     }
 }
-
 
 #pragma mark - IBActions Methods
 
 - (IBAction)chatAction:(UIBarButtonItem *)sender {
-    [self performSegueWithIdentifier:@"toChatSegue" sender:nil];
+    [self performSegueWithIdentifier:@"toMatchesSegue" sender:nil];
 }
 
 - (IBAction)settingsAction:(UIBarButtonItem *)sender {
@@ -127,6 +121,10 @@
 }
 
 - (IBAction)likeAction:(UIButton *)sender {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Like"];
+    [mixpanel flush];
+    
     [self checkLike];
 }
 
@@ -135,6 +133,10 @@
 }
 
 - (IBAction)dislikeAction:(UIButton *)sender {
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Dislike"];
+    [mixpanel flush];
+    
     [self checkDislike];
 }
 
@@ -189,8 +191,6 @@
                 self.likeButton.enabled = YES;
                 self.infoButton.enabled = YES;
                 self.dislikeButton.enabled = YES;
-                
-                
             }
         }];
     }
@@ -341,7 +341,15 @@
             [chatRoom setObject:[PFUser currentUser] forKey:kChatRoomUser1Key];
             [chatRoom setObject:self.photo[kPhotoUserKey] forKey:kChatRoomUser2Key];
             [chatRoom saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                [self performSegueWithIdentifier:@"toMatchSegue" sender:nil];
+                
+                UIStoryboard *storyboard = self.storyboard;
+                MatchViewController *matchViewController  = [storyboard instantiateViewControllerWithIdentifier:@"matchViewController"];
+                matchViewController.view.backgroundColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.75f];
+                matchViewController.transitioningDelegate = self;
+                matchViewController.delegate = self;
+                matchViewController.matchedUserImage = self.profilePictureImageView.image;
+                matchViewController.modalPresentationStyle = UIModalPresentationCustom;
+                [self presentViewController:matchViewController animated:YES completion:nil];
             }];
         }
         else {
@@ -354,8 +362,43 @@
 
 -(void)presentMatchesViewController {
     [self dismissViewControllerAnimated:YES completion:^{
-        [self performSegueWithIdentifier:@"toChatSegue" sender:nil];
+        [self performSegueWithIdentifier:@"toMatchesSegue" sender:nil];
     }];
+}
+
+#pragma mark - ProfileViewController Delegate
+
+-(void)didPressLike {
+    [self.navigationController popViewControllerAnimated:NO];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Like"];
+    [mixpanel flush];
+    
+    [self checkLike];
+}
+
+-(void)didPressDislike {
+    [self.navigationController popViewControllerAnimated:NO];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Dislike"];
+    [mixpanel flush];
+    
+    [self checkDislike];
+}
+
+#pragma mark - UIViewControllerTransitioning Delegate
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source
+{
+    TransitionAnimator *animator = [[TransitionAnimator alloc] init];
+    animator.presenting = YES;
+    return animator;
+}
+
+-(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed
+{
+    TransitionAnimator *animator = [[TransitionAnimator alloc] init];
+    return animator;
 }
 
 @end

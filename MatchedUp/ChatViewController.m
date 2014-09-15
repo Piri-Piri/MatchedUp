@@ -28,12 +28,11 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-    [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     
+    [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
     self.currentUser = [PFUser currentUser];
     PFUser *testUser1 = self.chatRoom[kChatRoomUser1Key];
@@ -51,6 +50,8 @@
     self.initialLoadComplete = NO;
     
     // Create avatar with initials images
+    self.collectionView.collectionViewLayout.messageBubbleFont = [UIFont fontWithName:@"HelveticaNeue" size:17.0f];
+    
     CGFloat outgoingDiameter = self.collectionView.collectionViewLayout.outgoingAvatarViewSize.width;
     CGFloat incomingDiameter = self.collectionView.collectionViewLayout.incomingAvatarViewSize.width;
     
@@ -88,7 +89,7 @@
                                     outgoingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleLightGrayColor]];
     
     self.incomingBubbleImageView = [JSQMessagesBubbleImageFactory
-                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleGreenColor]];
+                                    incomingMessageBubbleImageViewWithColor:[UIColor jsq_messageBubbleBlueColor]];
     
     /* Remove camera button since media messages are not yet implemented */
     self.inputToolbar.contentView.leftBarButtonItem = nil;

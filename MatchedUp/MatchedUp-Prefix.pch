@@ -12,13 +12,15 @@
 // Include any system framework and library headers here that should be included in all compilation units.
 // You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 
-
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
 #import <FacebookSDK/FacebookSDK.h>
 #import <ParseFacebookUtils/PFFacebookUtils.h>
+#import "Mixpanel/Mixpanel.h"
 
 #import "Constants.h"
+
+#define MIXPANEL_TOKEN @"10a98b31decf7c8e8ce55c200a8a6e49"
 
 #endif

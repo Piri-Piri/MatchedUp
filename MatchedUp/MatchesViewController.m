@@ -114,7 +114,6 @@
     cell.textLabel.text = likedUser[kUserProfileKey][kUserProfileFirstnameKey];
     cell.detailTextLabel.text = likedUser[kUserProfileKey][kUserProfileBirthdayKey];
     
-    //cell.imageView.image = ((placeholder image))
     cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
     
     PFQuery *queryForPhoto = [[PFQuery alloc] initWithClassName:kPhotoClassKey];
