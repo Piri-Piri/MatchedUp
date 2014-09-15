@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		633C9C5019C6EE80004371C4 /* defaultPrefsFile.plist in Resources */ = {isa = PBXBuildFile; fileRef = 633C9C4F19C6EE80004371C4 /* defaultPrefsFile.plist */; };
 		635610EE19C38DC7004197D1 /* ParseFacebookUtils.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635610ED19C38DC7004197D1 /* ParseFacebookUtils.framework */; };
 		635610F219C39E6E004197D1 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635610F119C39E6E004197D1 /* HomeViewController.m */; };
 		635610F619C3A183004197D1 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 635610F519C3A183004197D1 /* SettingsViewController.m */; };
@@ -16,7 +17,6 @@
 		63AB62FC19C2CB1100E2230F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AB62FB19C2CB1100E2230F /* AppDelegate.m */; };
 		63AB630519C2CB1100E2230F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63AB630319C2CB1100E2230F /* Main.storyboard */; };
 		63AB630719C2CB1100E2230F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63AB630619C2CB1100E2230F /* Images.xcassets */; };
-		63AB630A19C2CB1100E2230F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AB630819C2CB1100E2230F /* LaunchScreen.xib */; };
 		63AB631619C2CB1200E2230F /* MatchedUpTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AB631519C2CB1200E2230F /* MatchedUpTests.m */; };
 		63AB632419C2CBEC00E2230F /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AB632019C2CBEC00E2230F /* FacebookSDK.framework */; };
 		63AB632519C2CBEC00E2230F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AB632119C2CBEC00E2230F /* Bolts.framework */; };
@@ -249,6 +249,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		633C9C4F19C6EE80004371C4 /* defaultPrefsFile.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefsFile.plist; sourceTree = "<group>"; };
 		635610ED19C38DC7004197D1 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ParseFacebookUtils.framework; sourceTree = "<group>"; };
 		635610F019C39E6E004197D1 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		635610F119C39E6E004197D1 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
@@ -265,7 +266,6 @@
 		63AB62FB19C2CB1100E2230F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		63AB630419C2CB1100E2230F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		63AB630619C2CB1100E2230F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		63AB630919C2CB1100E2230F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		63AB630F19C2CB1200E2230F /* MatchedUpTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MatchedUpTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		63AB631419C2CB1200E2230F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		63AB631519C2CB1200E2230F /* MatchedUpTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MatchedUpTests.m; sourceTree = "<group>"; };
@@ -628,7 +628,6 @@
 				63AB62FB19C2CB1100E2230F /* AppDelegate.m */,
 				63AB630319C2CB1100E2230F /* Main.storyboard */,
 				63AB630619C2CB1100E2230F /* Images.xcassets */,
-				63AB630819C2CB1100E2230F /* LaunchScreen.xib */,
 				63AB62F619C2CB1100E2230F /* Supporting Files */,
 				63AB631F19C2CBAC00E2230F /* Frameworks */,
 			);
@@ -642,6 +641,7 @@
 				63EFB43119C4FB2D00386D85 /* JSQMessagesViewController */,
 				63EFB4C219C5CD1400386D85 /* JSQSystemSoundPlayer */,
 				63EFB42319C473D800386D85 /* TestUser */,
+				633C9C4F19C6EE80004371C4 /* defaultPrefsFile.plist */,
 				63AB634819C311CB00E2230F /* Constants.h */,
 				63AB634919C311CB00E2230F /* Constants.m */,
 				63AB62F719C2CB1100E2230F /* Info.plist */,
@@ -1314,6 +1314,7 @@
 				63EFB5C219C6B49C00386D85 /* EditProfile@2x.png in Resources */,
 				63EFB56F19C6B49C00386D85 /* Facebook.png in Resources */,
 				63EFB49319C4FB2D00386D85 /* bubble_tailless.png in Resources */,
+				633C9C5019C6EE80004371C4 /* defaultPrefsFile.plist in Resources */,
 				63EFB49519C4FB2D00386D85 /* camera.png in Resources */,
 				63EFB59B19C6B49C00386D85 /* Single.png in Resources */,
 				63EFB5E119C6B49C00386D85 /* SettingIcon.png in Resources */,
@@ -1384,7 +1385,6 @@
 				63EFB59719C6B49C00386D85 /* NameAgeStatusBar.png in Resources */,
 				63EFB48A19C4FB2D00386D85 /* bubble@2x.png in Resources */,
 				63EFB58E19C6B49C00386D85 /* ChatIcon@2x.png in Resources */,
-				63AB630A19C2CB1100E2230F /* LaunchScreen.xib in Resources */,
 				63EFB5E819C6B49C00386D85 /* Icon-Small.png in Resources */,
 				63EFB56B19C6B49C00386D85 /* BG.png in Resources */,
 				63EFB5B719C6B49C00386D85 /* Send_Bar_BG.png in Resources */,
@@ -1531,14 +1531,6 @@
 				63AB630419C2CB1100E2230F /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		63AB630819C2CB1100E2230F /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				63AB630919C2CB1100E2230F /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
