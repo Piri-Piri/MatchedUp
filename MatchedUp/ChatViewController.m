@@ -173,8 +173,8 @@
     
     PFQuery *queryForChats = [PFQuery queryWithClassName:kChatClassKey];
     [queryForChats whereKey:kChatChatroomKey equalTo:self.chatRoom];
-    [queryForChats includeKey:kChatFromToKey];
-    [queryForChats includeKey:kChatFromToKey];
+    [queryForChats includeKey:kChatFromUserKey];
+    [queryForChats includeKey:kChatToUserKey];
     [queryForChats orderByAscending:@"createdAt"];
     [queryForChats findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -185,7 +185,7 @@
                 self.initialLoadComplete = YES;
             
                 for (PFObject *object in objects) {
-                    PFUser *user = object[kChatFromToKey];
+                    PFUser *user = object[kChatFromUserKey];
                     [self.messages addObject:[[JSQMessage alloc] initWithText:object[kChatTextKey] sender:user[kUserProfileKey][kUserProfileFirstnameKey] date:[NSDate distantPast]]];
                 }
                 [self scrollToBottomAnimated:YES];
