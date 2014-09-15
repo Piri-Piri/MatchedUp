@@ -1,5 +1,5 @@
 //
-//  FirstViewController.h
+//  SettingsViewController.h
 //  MatchedUp
 //
 //  Created by David Pirih on 12.09.14.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FirstViewController : UIViewController
-
+@interface SettingsViewController : UIViewController
 
 @end
-

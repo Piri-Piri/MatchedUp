@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  HomeViewController.h
 //  MatchedUp
 //
 //  Created by David Pirih on 12.09.14.
@@ -8,10 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
-
+@interface HomeViewController : UIViewController 
 
 @end
-

@@ -1,5 +1,5 @@
 //
-//  SecondViewController.h
+//  EditProfileViewController.h
 //  MatchedUp
 //
 //  Created by David Pirih on 12.09.14.
@@ -7,12 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
-#import "Constants.h"
-
-@interface SecondViewController : UIViewController
-
+@interface EditProfileViewController : UIViewController
 
 @end
-

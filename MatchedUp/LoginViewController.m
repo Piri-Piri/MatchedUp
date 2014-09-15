@@ -30,7 +30,7 @@
     // update (already) logged-in users 
     if ([PFUser currentUser] && [PFFacebookUtils isLinkedWithUser:[PFUser currentUser]]) {
         [self updateUserInformation];
-        [self performSegueWithIdentifier:@"toTabBarSegue" sender:self];
+        [self performSegueWithIdentifier:@"toHomeSegue" sender:self];
     }
 }
 
@@ -52,12 +52,13 @@
 #pragma mark - IBAction Methods
 
 - (IBAction)loginAction:(UIButton *)sender {
-    NSArray *permissions = @[@"user_about_me", @"user_interests", @"user_relationships", @"user_birthday", @"user_location", @"user_relationship_details"];
+    NSArray *permissions = @[@"user_about_me", @"user_birthday", @"user_interests", @"user_relationships", @"user_relationship_details", @"user_location"];
     
     self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
     
     [PFFacebookUtils logInWithPermissions:permissions block:^(PFUser *user, NSError *error) {
+        //NSLog(@"PFUser: %@", user);
         [self.activityIndicator stopAnimating];
         self.activityIndicator.hidden = YES;
         if (!user) {
@@ -72,9 +73,10 @@
             }
         } else {
             [self updateUserInformation];
-            [self performSegueWithIdentifier:@"loginToTabBarSegue" sender:self];
+            [self performSegueWithIdentifier:@"toHomeSegue" sender:self];
         }
     }];
+
 }
 
 #pragma mark - Helper Methods
@@ -84,8 +86,9 @@
     [request startWithCompletionHandler:^(FBRequestConnection *connection, id result, NSError *error) {
         if(!error) {
             NSDictionary *userDict = (NSDictionary *)result;
+            //NSLog(@"FBUser: %@", result);
             
-            //cCreate a URL
+            // Create a URL
             NSString *facebookID = userDict[@"id"];
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
             
@@ -97,21 +100,37 @@
             if (userDict[kUserProfileFirstnameKey]) {
                 userProfile[kUserProfileFirstnameKey] = userDict[kUserProfileFirstnameKey];
             }
-            if (userDict[kUserProfileLocationKey][kUserProfileNameKey]) {
-                userProfile[kUserProfileLocationKey] = userDict[kUserProfileLocationKey][kUserProfileNameKey];
+            if (userDict[kUserProfileLastnameKey]) {
+                userProfile[kUserProfileLastnameKey] = userDict[kUserProfileLastnameKey];
+            }
+            if (userDict[kUserProfileLocationKey][kUserProfileLocationNameKey]) {
+                userProfile[kUserProfileLocationKey] = userDict[kUserProfileLocationKey][kUserProfileLocationNameKey];
             }
             if (userDict[kUserProfileGenderKey]) {
                 userProfile[kUserProfileGenderKey] = userDict[kUserProfileGenderKey];
             }
             if (userDict[kUserProfileBirthdayKey]) {
                 userProfile[kUserProfileBirthdayKey] = userDict[kUserProfileBirthdayKey];
+                NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+                [formatter setDateStyle:NSDateFormatterShortStyle];
+                NSDate *date = [formatter dateFromString:userDict[kUserProfileBirthdayKey]];
+                NSDate *now = [NSDate date];
+                
+                int age = [now timeIntervalSinceDate: date] / 31536000;
+                userProfile[kUserProfileCalculatedAgeKey] = @(age);
+                
             }
             if (userDict[kUserProfileInterestedInKey]) {
                 userProfile[kUserProfileInterestedInKey] = userDict[kUserProfileInterestedInKey];
             }
+            if (userDict[kUserProfileRelationshipStatusKey]) {
+                userProfile[kUserProfileRelationshipStatusKey] = userDict[kUserProfileRelationshipStatusKey];
+            }
             if ([pictureURL absoluteString]) {
                 userProfile[kUserProfilePictureURLKey] = [pictureURL absoluteString];
             }
+            
+            //NSLog(@"%@", userProfile);
             
             [[PFUser currentUser] setObject:userProfile forKey:kUserProfileKey];
             [[PFUser currentUser] saveInBackground];
@@ -151,7 +170,7 @@
             PFUser *user = [PFUser currentUser];
             self.imageData = [[NSMutableData alloc] init];
             
-            NSURL *profilePictureURL = [NSURL URLWithString:user[kUserProfileNameKey][kUserProfilePictureURLKey]];
+            NSURL *profilePictureURL = [NSURL URLWithString:user[kUserProfileKey][kUserProfilePictureURLKey]];
             NSURLRequest *urlRequest = [NSURLRequest requestWithURL:profilePictureURL cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:4.0f];
             NSURLConnection *urlConnection = [[NSURLConnection alloc] initWithRequest:urlRequest delegate:self];
             if(!urlConnection) {
@@ -165,10 +184,11 @@
 
 -(void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.imageData appendData:data];
+    
 }
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // save image to parse
+    // save image to parse;
     UIImage *profileImage = [UIImage imageWithData:self.imageData];
     [self uploadPFFileToParse:profileImage];
 }

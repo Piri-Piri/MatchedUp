@@ -7,11 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
-#import <FacebookSDK/FacebookSDK.h>
-#import <ParseFacebookUtils/PFFacebookUtils.h>
-
-#import "Constants.h"
 
 @interface LoginViewController : UIViewController <NSURLConnectionDataDelegate>
 
