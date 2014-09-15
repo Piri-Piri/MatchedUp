@@ -36,13 +36,13 @@
     
     
     self.currentUser = [PFUser currentUser];
-    PFUser *testUser1 = self.chatRoom[@"user1"];
+    PFUser *testUser1 = self.chatRoom[kChatRoomUser1Key];
     
     if ([testUser1.objectId isEqual:self.currentUser.objectId]) {
-        self.withUser = self.chatRoom[@"user2"];
+        self.withUser = self.chatRoom[kChatRoomUser2Key];
     }
     else {
-        self.withUser = self.chatRoom[@"user1"];
+        self.withUser = self.chatRoom[kChatRoomUser1Key];
     }
     
     self.title = self.withUser[kUserProfileKey][kUserProfileFirstnameKey];
@@ -171,10 +171,10 @@
 -(void)checkForNewChats {
     int oldChatCount = (int)[self.messages count];
     
-    PFQuery *queryForChats = [PFQuery queryWithClassName:@"Chat"];
-    [queryForChats whereKey:@"chatroom" equalTo:self.chatRoom];
-    [queryForChats includeKey:@"fromUser"];
-    [queryForChats includeKey:@"toUser"];
+    PFQuery *queryForChats = [PFQuery queryWithClassName:kChatClassKey];
+    [queryForChats whereKey:kChatChatroomKey equalTo:self.chatRoom];
+    [queryForChats includeKey:kChatFromToKey];
+    [queryForChats includeKey:kChatFromToKey];
     [queryForChats orderByAscending:@"createdAt"];
     [queryForChats findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         if (!error) {
@@ -185,8 +185,8 @@
                 self.initialLoadComplete = YES;
             
                 for (PFObject *object in objects) {
-                    PFUser *user = object[@"fromUser"];
-                    [self.messages addObject:[[JSQMessage alloc] initWithText:object[@"text"] sender:user[kUserProfileKey][kUserProfileFirstnameKey] date:[NSDate distantPast]]];
+                    PFUser *user = object[kChatFromToKey];
+                    [self.messages addObject:[[JSQMessage alloc] initWithText:object[kChatTextKey] sender:user[kUserProfileKey][kUserProfileFirstnameKey] date:[NSDate distantPast]]];
                 }
                 [self scrollToBottomAnimated:YES];
                 [self finishReceivingMessage];
@@ -203,11 +203,11 @@
                       date:(NSDate *)date
 {
     if (text.length != 0) {
-        PFObject *chat = [PFObject objectWithClassName:@"Chat"];
-        [chat setObject:self.chatRoom forKey:@"chatroom"];
+        PFObject *chat = [PFObject objectWithClassName:kChatClassKey];
+        [chat setObject:self.chatRoom forKey:kChatChatroomKey];
         [chat setObject:[PFUser currentUser] forKey:kActivityFromUserKey];
         [chat setObject:self.withUser forKey:kActivityToUserKey];
-        [chat setObject:text forKey:@"text"];
+        [chat setObject:text forKey:kChatTextKey];
         [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             [JSQSystemSoundPlayer jsq_playMessageSentSound];
             
