@@ -67,7 +67,7 @@
     
 }
 
-- (IBAction)dislikeAction:(id)sender {
+- (IBAction)dislikeAction:(UIButton *)sender {
     [self.delegate didPressDislike];
 }
 

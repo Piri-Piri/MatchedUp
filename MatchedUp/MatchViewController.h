@@ -17,6 +17,6 @@
 @interface MatchViewController : UIViewController
 
 @property (strong, nonatomic) UIImage *matchedUserImage;
-@property (weak) id <MatchViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <MatchViewControllerDelegate> delegate;
 
 @end

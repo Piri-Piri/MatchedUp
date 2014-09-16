@@ -155,12 +155,12 @@
             
         }];
         
-        PFQuery *queryForLike = [PFQuery queryWithClassName:kActivityToUserKey];
+        PFQuery *queryForLike = [PFQuery queryWithClassName:kActivityClassKey];
         [queryForLike whereKey:kActivityTypeKey equalTo:kActivityLikeKey];
         [queryForLike whereKey:kActivityPhotoKey equalTo:self.photo];
         [queryForLike whereKey:kActivityFromUserKey equalTo:[PFUser currentUser]];
         
-        PFQuery *queryForDislike = [PFQuery queryWithClassName:kActivityToUserKey];
+        PFQuery *queryForDislike = [PFQuery queryWithClassName:kActivityClassKey];
         [queryForDislike whereKey:kActivityTypeKey equalTo:kActivityDislikeKey];
         [queryForDislike whereKey:kActivityPhotoKey equalTo:self.photo];
         [queryForDislike whereKey:kActivityFromUserKey equalTo:[PFUser currentUser]];
@@ -251,11 +251,11 @@
     [likeActivity setObject:[self.photo objectForKey:kPhotoUserKey] forKey:kActivityToUserKey];
     [likeActivity setObject:self.photo forKey:kActivityPhotoKey];
     [likeActivity saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        // check for likes on both side and if, create a chatroom
+        [self checkForPhotoUserLikes];
         self.isLikedByUser = YES;
         self.isDislikedByUser = NO;
         [self.activities addObject:likeActivity];
-        // check for likes on both side and if, create a chatroom
-        [self checkForPhotoUserLikes];
         [self setupNextPhoto];
     }];
     
@@ -277,6 +277,7 @@
 
 -(void) checkLike {
     if(self.isLikedByUser) {
+        [self setupNextPhoto];
         return;
     }
     else if (self.isDislikedByUser) {

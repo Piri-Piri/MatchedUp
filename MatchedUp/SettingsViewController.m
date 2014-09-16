@@ -61,7 +61,7 @@
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
-- (IBAction)editProfileAction:(id)sender {
+- (IBAction)editProfileAction:(UIButton *)sender {
     
 }
 
@@ -71,11 +71,14 @@
     if (sender == self.ageSilder) {
         [[NSUserDefaults standardUserDefaults] setInteger:(int)self.ageSilder.value forKey:kAgeMaxKey];
         self.ageLabel.text = [NSString stringWithFormat:@"%i", (int)self.ageSilder.value];
-    } else if (sender == self.showMenSwitch) {
+    }
+    else if (sender == self.showMenSwitch) {
         [[NSUserDefaults standardUserDefaults] setBool:self.showMenSwitch.isOn forKey:kMenEnabledKey];
-    } else if (sender == self.showWomenSwitch) {
+    }
+    else if (sender == self.showWomenSwitch) {
         [[NSUserDefaults standardUserDefaults] setBool:self.showWomenSwitch.isOn forKey:kWomenEnabledKey];
-    } else if (sender == self.singlesOnlySwitch) {
+    }
+    else if (sender == self.singlesOnlySwitch) {
         [[NSUserDefaults standardUserDefaults] setBool:self.singlesOnlySwitch.isOn forKey:kSingleEnabledKey];
     }
     [[NSUserDefaults standardUserDefaults] synchronize];
